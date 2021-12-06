@@ -13,8 +13,20 @@ cake
 
 Usage:
 ```shell
-./feedme omlette steak cake
+./feedme omelette egg-sandwich turkey-sandwich pasta steak cake
 ```
+
+Should create a workflow that looks like:
+![](./assets/full-workflow.png)
+
+If you leave out any of the meals, the DAG will omit those branches.
+Running:
+```shell
+./feedme steak cake
+```
+
+Will produce:
+![](./assets/steak-cake-workflow.png)
 
 # Setup
 1. Have a Kubernetes cluster available, I used [Docker for Mac's](https://docs.docker.com/desktop/kubernetes/).
