@@ -13,7 +13,7 @@ cake
 
 Usage:
 ```shell
-./feedme omelette egg-sandwich turkey-sandwich pasta steak cake
+./feedme --omelette --egg-sandwich --turkey-sandwich --pasta --steak --cake
 ```
 
 Should create a workflow that looks like:
@@ -23,7 +23,7 @@ Should create a workflow that looks like:
 If you leave out any of the meals, the DAG will omit those branches.
 Running:
 ```shell
-./feedme steak cake
+./feedme --steak --cake
 ```
 
 Will produce:

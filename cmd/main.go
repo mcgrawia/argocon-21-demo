@@ -16,21 +16,21 @@ func main() {
 func runCmd() {
 	parser := argparse.NewParser("feedme", "Use Argo Workflows to make food!")
 
-	var mealCmds []*argparse.Command
+	mealCmds := make(map[string]*bool, len(meals.All))
 	for _, meal := range meals.All {
-		mealCmds = append(mealCmds, parser.NewCommand(meal.Name(), fmt.Sprintf("Cook %s.", meal.Name())))
+		mealCmds[meal.Name()] = parser.Flag("", meal.Name(), &argparse.Options{Help: fmt.Sprintf("Cook %s.", meal.Name())})
 	}
 
 	err := parser.Parse(os.Args)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Print(parser.Usage(err))
 		return
 	}
 
 	var mealsToBuild []string
-	for _, mealCmd := range mealCmds {
-		if mealCmd.Happened() {
-			mealsToBuild = append(mealsToBuild, mealCmd.GetName())
+	for mealName, mealFlag := range mealCmds {
+		if *mealFlag {
+			mealsToBuild = append(mealsToBuild, mealName)
 		}
 	}
 
